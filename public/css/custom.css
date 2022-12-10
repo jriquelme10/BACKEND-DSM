@@ -1,0 +1,55 @@
+.barraNav {background-color: #565656;}
+
+
+
+
+.form-control{
+    background-color: var(--background);
+    color: var(--foreground);
+}
+
+}
+
+body {
+
+  background: var(--background);
+  color: var(--foreground);
+
+}
+
+.card-header{
+
+    color:white !important;
+}
+
+.dropdown-item {
+
+    color:white !important;
+}
+.dropdown-menu{
+    box-shadow:0 1px 1px #c2c3c3 inset, 0 0 8px #b9b9b9; ;
+}
+
+textarea:focus, input:focus, input[type]:focus {
+    border-color: rgb(#e5ff00);
+    box-shadow: 0 1px 1px #b3b3b3 inset, 0 0 8px #bdc1c2;
+    outline:none;
+}
+
+
+.dark-mode-toggle {
+  position: absolute;
+  z-index: 0;
+  top: 1.5em;
+  right: 13em;
+  color: var(--foreground);
+  border: 0px solid currentColor;
+  padding: 1px;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 16px;
+  height: 16px;
+}
+
+
