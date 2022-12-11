@@ -83,9 +83,9 @@ return [
     |
     */
 
-    'layout_topnav' => null,
-    'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
+    'layout_topnav' => false,
+    'layout_boxed' => false,
+    'layout_fixed_sidebar' => true,
     'layout_fixed_navbar' => true,
     'layout_fixed_footer' => true,
     'layout_dark_mode' => null,
@@ -233,7 +233,7 @@ return [
         ],
         [
             'type'         => 'fullscreen-widget',
-            'topnav_right' => true,
+            'topnav_right' => false,
         ],
 
         // Sidebar items:
@@ -244,15 +244,9 @@ return [
         [
 
             'text' => 'Administrar ordenes',
-            'url'  => '/cliente',
+            'url'  => '/ordenes',
             'icon' => 'fas fa-fw fa-calendar',
 
-        ],
-        [
-            'can' => 'cliente',
-            'text' => 'Realizar solicitud',
-            'url'  => 'cliente/create',
-            'icon' => 'fas fa-fw fa-clock',
         ],
 
 

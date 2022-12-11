@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Solicitud;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -31,24 +31,24 @@ class SolicitudController extends Controller
         $cliente_id = $user->id;
 
 
-        DB::table('solicituds')->where('id', $cliente_id);
+        DB::table('orders')->where('id', $cliente_id);
         return redirect()->route('home')->with('password', 'updated');
     }
 
 
     public function index()
     {
-        $solicituds = Auth::user()->solicitudesCliente()->orderBy('fecha_solicitud')->orderBy('hora_solicitud')->simplePaginate(10);
+        $orders = Auth::user()->ordenesCliente()->orderBy('date_order')->orderBy('time_order')->simplePaginate(10);
 
-        return view('cliente.edit')->with('solicituds', $solicituds);
+        return view('cliente.edit')->with('orders', $orders);
     }
 
-    public function indexEstilista()
+    /* public function indexEstilista()
     {
-        $solicituds = Auth::user()->solicitudesEstilista()->orderBy('fecha_solicitud')->orderBy('hora_solicitud')->simplePaginate(10);
+        $orders = Auth::user()->solicitudesEstilista()->orderBy('fecha_solicitud')->orderBy('hora_solicitud')->simplePaginate(10);
 
         return view('estilista.edit')->with('solicituds', $solicituds);
-    }
+    }*/
 
 
     /**
@@ -68,7 +68,7 @@ class SolicitudController extends Controller
      * @param  \App\Models\Solicitud  $solicitud
      * @return \Illuminate\Http\Response
      */
-    public function show(Solicitud $solicitud)
+    public function show(Order $orders)
     {
         //
     }
@@ -79,7 +79,7 @@ class SolicitudController extends Controller
      * @param  \App\Models\Solicitud  $solicitud
      * @return \Illuminate\Http\Response
      */
-    public function edit(Solicitud $solicitud)
+    public function edit(Order $orders)
     {
         //
     }
@@ -91,16 +91,16 @@ class SolicitudController extends Controller
      * @param  \App\Models\Solicitud  $solicitud
      * @return \Illuminate\Http\Response
      */
-    public function update(Solicitud $solicitud)
+    public function update(Order $orders)
     {
     }
 
 
     public function updateEstado($request)
     {
-        $solicitud = Solicitud::where('id', $request)->get()->first();
-        $solicitud->estado = 'ANULADA';
-        $solicitud->save();
+        $orders = Order::where('id', $request)->get()->first();
+        $orders->status = 'PEDIDO CANCELADO';
+        $orders->save();
         return redirect('/cliente');
     }
 
@@ -108,32 +108,32 @@ class SolicitudController extends Controller
     public function agregarComentario(Request $request, $id)
     {
 
-        $solicitud = Solicitud::where('id', $id)->FirstOrFail();
+        $orders = Order::where('id', $id)->FirstOrFail();
 
-        $solicitud->comentario = $request->texto;
+        $orders->time_order = $request->time;
 
-        $solicitud->save();
+        $orders->save();
 
         return redirect('/cliente');
     }
     public function cancelStatusSolicitud($request)
     {
-        $solicitud = Solicitud::where('id', $request)->get()->first();
-        $solicitud->estado = 'ANULADA';
-        $solicitud->save();
-        session()->flash('anular', 'La Solicitud fue anulada con exito!');
+        $orders = Order::where('id', $request)->get()->first();
+        $orders->estado = 'PEDIDO CANCELADO';
+        $orders->save();
+        session()->flash('CANCELAR', 'El pedido fue cancelado con exito!');
         return redirect('/cliente');
     }
     public function AceptarServicio(Request $request, $id)
     {
         $user = Auth::user();
 
-        $solicitud = Solicitud::where('id', $id)->get()->first();
+        $orders = Order::where('id', $id)->get()->first();
 
-        $solicitud->estilista_id = $user->id;
+        $orders->cliente_id = $user->id;
 
-        $date = date($solicitud->fecha_solicitud);
-        $time = date($solicitud->hora_solicitud);
+        $date = date($orders->date_order);
+        $time = date($orders->time_order);
 
         if (date("Y-m-d") <= $date && date("H:i:s") < $time) {
             $solicitud->estado = 'ATENDIDA A TIEMPO';
@@ -148,9 +148,9 @@ class SolicitudController extends Controller
         }
     }
 
-    public function VerSolicitudes()
+    /*public function VerSolicitudes()
     {
-        $solicituds = solicitud::where('estado', 'INGRESADA')->simplePaginate(5);
+        $orders = Order::where('status', 'INGRESADO')->simplePaginate(5);
         return view("estilista.index")->with('solicituds', $solicituds);
     }
 
@@ -175,7 +175,7 @@ class SolicitudController extends Controller
      * @param  \App\Models\Solicitud  $solicitud
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Solicitud $solicitud)
+    /*public function destroy(Solicitud $solicitud)
     {
         //
     }
@@ -224,5 +224,5 @@ class SolicitudController extends Controller
 
 
         return redirect(route('home'));
-    }
+    }*/
 }

@@ -49,15 +49,16 @@ class User extends Authenticatable
     ];
 
 
-    public function solicitudesCliente()
+    public function ordenesCliente()
     {
         return $this->hasMany(Solicitud::class, "cliente_id");
     }
 
-    public function solicitudesEstilista()
+
+    /*public function OrdenesChef()
     {
-        return $this->hasMany(Solicitud::class, "estilista_id");
-    }
+        return $this->hasMany(Solicitud::class, "chef_id");
+    }*/
 
     public static function getUserNameById($id)
     {

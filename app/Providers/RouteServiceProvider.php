@@ -20,8 +20,6 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME = '/home';
     public const REGISTRO = '/register';
     public const SOLICITUD = '/home';
-    public const ESTILISTA = '/estilista/index';
-    public const ADMINISTRADOR = '/administrador';
 
 
     /**

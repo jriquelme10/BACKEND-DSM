@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('orderrs', function (Blueprint $table) {
             $table->id();
             $table->integer('totalAmount');
             $table->unsignedBigInteger('number_table');
-            $table->string('producto');
             $table->foreign('number_table')->references('id')->on('tables');
-            $table->foreign('producto')->references('nombre')->on('productos');
             $table->timestamps();
+            $table->enum('status', ['PENDIENTE', 'PREPARANDO PEDIDO', 'PEDIDO LISTO']);
         });
     }
 
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_order');
+        Schema::dropIfExists('orders');
     }
 };

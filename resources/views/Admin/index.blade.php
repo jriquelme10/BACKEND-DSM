@@ -1,7 +1,5 @@
 @extends('adminlte::page')
 
-@section('title', 'Fashion Dog')
-
 @section('content_header')
     <h1>Restaurant COLO-COLO</h1>
 @stop
