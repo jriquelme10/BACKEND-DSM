@@ -20,8 +20,6 @@ return new class extends Migration
             $table->string('apellido');
             $table->integer('telefono');
             $table->string('email')->unique();
-            $table->enum('rol', ['cliente', 'estilista', 'administrativo'])->default('cliente');
-            $table->tinyInteger('status'); //F = inactivo, T = activo
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

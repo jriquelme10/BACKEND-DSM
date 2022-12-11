@@ -15,7 +15,7 @@ class OrderrController extends Controller
     {
         $orderrs = Orderr::all();
 
-        return view("administrarOrdenes")->with([
+        return view("Orders")->with([
             "Orders" => $orderrs
 
 
@@ -29,7 +29,7 @@ class OrderrController extends Controller
     }
 
 
-    public function saveOrder(Request $request)
+    /*public function saveOrder(Request $request)
     {
         $arr = [
             'order' => [
@@ -63,6 +63,7 @@ class OrderrController extends Controller
 
         return view("administrarOrdenes")->with('reumen_ordens', $pedidos);
     }
+    */
     public function atender_orden()
     {
     }
