@@ -37,7 +37,7 @@ Route::get('/home', [App\Http\Controllers\AdminHomeController::class, 'index'])-
 
 
 Route::resource('/ordenes', OrderrController::class);
-Route::get('/detalleOrden', [OrderrController::class, 'detallesOrden']);
+Route::get('/detail', [OrderrController::class, 'detail']);
 
 
 
