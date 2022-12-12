@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
-
+use Illuminate\Support\Facades\Validator;
 
 class PlatosController extends Controller
 {
@@ -18,6 +17,7 @@ class PlatosController extends Controller
 
         return json_encode(['productos' => $productos]);
     }
+
 
     public function create(Request $request)
     {
