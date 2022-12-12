@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -11,6 +10,7 @@ class CategoryController extends Controller
     public function index()
     {
         $category = Category::get();
+
         return json_encode(['category' => $category]);
     }
 
@@ -21,19 +21,27 @@ class CategoryController extends Controller
         $category->save();
     }
 
-    public function update(Request $request, $id)
+    public function show($id)
     {
-        $category = Category::findOrFail($request->$id);
-        $category->name = $request->name;
-        $category->save();
+        $category = Category::find($id);
 
         return $category;
     }
 
+    public function update(Request $request)
+    {
+        $data = $request->json()->all();
+        $name = $data['name'];
+        $id = $data['id'];
+        Category::where('id', $id)->update(['name' => $name]);
+
+        return json_encode(['msg' => 'Producto actualizado']);
+    }
+
     public function destroy($id)
     {
-        $category = Category::destroy($id);
+        Category::destroy($id);
 
-        return $category;
+        return json_encode(['msg' => 'Categoria eliminada']);
     }
 }
