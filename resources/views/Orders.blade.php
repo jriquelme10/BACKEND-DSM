@@ -46,8 +46,8 @@
 
                             <td>{{ $pedido->status }}</td>
 
-                            <td><button type="button" class="btn btn-danger" data-toggle="modal"
-                                data-target="#Tiempo-{{ $pedido->id }}">Finalizar pedido</button></td>
+                            <td><button  action="{{ route('finishOrder', ['id' => $pedido->id]) }}" type="button" class="btn btn-danger" data-toggle="modal"
+                                data-dismiss="submit">Finalizar pedido</button></td>
                         </tr>
 
 
@@ -56,22 +56,25 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Detalle del pedido
-                                        #{{ $pedido->id }}</h1>
-                                    <button type="button" class="btn" data-bs-dismiss="modal"
+                                    <h2 style="margin-left:auto;margin-right:auto" class="modal-title fs-5" id="exampleModalLabel">Detalle de orden
+                                        #{{ $pedido->id }}</h2>
+                                    <button name="finish" id="finish" type="button" class="btn" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
 
-                                    <div>Productos de la orden:</div>
+                                    <div style="text-align:center">
+                                        <label> Pedido: </label>
                                     @foreach ($pedido->detallesOrden as $detail)
-                                        <p>{{ $detail->quantity }}x  {{ $detail->productoId->nombre }}
+                                        {{ $detail->quantity }}x  {{ $detail->productoId->nombre }}
                                             Monto: ${{ $detail->productoId->precio * $detail->quantity }}
 
-                                        </p>
+
                                     @endforeach
-
-                                    <div class="mt-3">Total: ${{ $pedido->totalAmount }}</div>
+                                    </div>
+                                    <div style="text-align: center" class="mt-3">
+                                        <label>TOTAL: ${{ $pedido->totalAmount }} </label>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
@@ -81,28 +84,45 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal fade" id="Tiempo-{{ $pedido->id }}" tabindex="-1"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Ingrese el tiempo de preparación:</h1>
-                                    <button type="button" class="btn" data-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
+                    <form class="formulario" method="GET"
+                                 action="{{ route('attendOrder', ['id' => $pedido->id]) }}">
 
-                                    <input type="numeric" style="align-items: center" placeholder="Tiempo de preparación">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-dismiss="modal">Cerrar</button>
-                                    <button type="button" class="btn btn-success">Atender pedido</button>
-                                </div>
+                                <div class="modal fade" id="Tiempo-{{ $pedido->id }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h2 style="margin-left:auto;margin-right:auto"  id="exampleModalLabel">Asigna un tiempo al pedido:</h2>
+                                                <button type="button" class="btn-close" data-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
 
-                            </div>
-                        </div>
-                    </div>
+                                            <div class="form-group" style="text-align:center">
+                                                <label for="minutes">Tiempo del pedido en minutos:</label>
+                                                <select name="minutes" class="form-control" id="minutes">
+                                                  <option>15 </option>
+                                                  <option>30 </option>
+                                                  <option>45 </option>
+                                                  <option>60 </option>
+                                                  <option>75 </option>
+                                                  <option>90</option>
+                                                  <option>105</option>
+                                                  <option>120</option>
+                                                </select>
+
+                                            <div class="modal-footer">
+
+                                                <button style="margin-left:auto;margin-right:auto" type="submit"  class="btn btn-success">Atender pedido</button>
+                                                <button style="margin-left:auto;margin-right:auto" type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Cerrar</button>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
                 @endforeach
 
                 </tbody>

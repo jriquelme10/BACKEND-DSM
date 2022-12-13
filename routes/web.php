@@ -38,7 +38,10 @@ Route::get('/home', [App\Http\Controllers\AdminHomeController::class, 'index'])-
 
 Route::resource('/ordenes', OrderrController::class);
 Route::get('/detail', [OrderrController::class, 'detail']);
+Route::get('/index', [App\Http\Controllers\OrderrController::class, 'index'])->name('index');
 
+Route::get('/attendOrder/{id}', [OrderrController::class, 'attendOrder'])->name('attendOrder');
+Route::get('/finishOrder/{id}', [OrderrController::class, 'finishOrder'])->name('finishOrder');
 
 
 

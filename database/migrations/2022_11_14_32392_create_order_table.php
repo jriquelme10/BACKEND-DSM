@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('totalAmount');
             $table->unsignedBigInteger('number_table');
+            $table->integer('minutes')->nullable();
             $table->foreign('number_table')->references('id')->on('tables');
             $table->timestamps();
             $table->enum('status', ['PENDIENTE', 'PREPARANDO PEDIDO', 'PEDIDO LISTO']);
