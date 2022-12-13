@@ -37,6 +37,13 @@ class OrderrController extends Controller
         return response()->json(['isSuccess' => true, 'idOrden' => $order->id]);
     }
 
+    public function show($id)
+    {
+        $order = Orderr::find($id);
+
+        return $order;
+    }
+
     public function detailsOrder(int $order_id)
     {
         $orderrs = DB::table('orders_products')->where('order_id', '=', $order_id)->get();
