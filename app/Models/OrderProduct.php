@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\ResumenOrdenProductoController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,15 +9,12 @@ class OrderProduct extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
-
         'quantity',
         'product_id',
         'order_id',
-
-
     ];
 
     public function productoId()

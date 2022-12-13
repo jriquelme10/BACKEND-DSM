@@ -42,6 +42,6 @@ class CategoryController extends Controller
     {
         Category::destroy($id);
 
-        return json_encode(['msg' => 'Categoria eliminada']);
+        return response()->json(['isSuccess' => true]);
     }
 }

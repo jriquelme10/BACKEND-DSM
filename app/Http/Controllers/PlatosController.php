@@ -28,12 +28,12 @@ class PlatosController extends Controller
         $producto = new Producto();
 
         $file = $request->file('image');
-        $filename = uniqid() . '_' . $file->getClientOriginalName();
+        $filename = uniqid().'_'.$file->getClientOriginalName();
         $file->move(public_path('public/images'), $filename);
-        $url = URL::to('/') . '/public/images/' . $filename;
+        $url = URL::to('/').'/public/images/'.$filename;
         $producto['url'] = $url;
         $producto['nombre'] = $request->nombre;
-        $producto['categoria'] = $request->categoria;
+        $producto['category_id'] = $request->category_id;
         $producto['precio'] = $request->precio;
         $producto['descripcion'] = $request->descripcion;
 
@@ -52,12 +52,12 @@ class PlatosController extends Controller
     public function update(Request $request)
     {
         $nombre = $request->nombre;
-        $categoria = $request->categoria;
+        $category_id = $request->category_id;
         $precio = $request->precio;
         $descripcion = $request->descripcion;
         $id = $request->id;
 
-        Producto::where('id', $id)->update(['nombre' => $nombre, 'categoria' => $categoria, 'precio' => $precio, 'descripcion' => $descripcion]);
+        Producto::where('id', $id)->update(['nombre' => $nombre, 'category_id' => $category_id, 'precio' => $precio, 'descripcion' => $descripcion]);
 
         return response()->json(['isSuccess' => true]);
     }
@@ -70,19 +70,26 @@ class PlatosController extends Controller
         }
 
         $file = $request->file('image');
-        $filename = uniqid() . '_' . $file->getClientOriginalName();
+        $filename = uniqid().'_'.$file->getClientOriginalName();
         $file->move(public_path('public/images'), $filename);
-        $url = URL::to('/') . '/public/images/' . $filename;
+        $url = URL::to('/').'/public/images/'.$filename;
 
         $nombre = $request->nombre;
-        $categoria = $request->categoria;
+        $category_id = $request->category_id;
         $precio = $request->precio;
         $descripcion = $request->descripcion;
         $id = $request->id;
 
-        Producto::where('id', $id)->update(['nombre' => $nombre, 'categoria' => $categoria, 'precio' => $precio, 'descripcion' => $descripcion, 'url' => $url]);
+        Producto::where('id', $id)->update(['nombre' => $nombre, 'category_id' => $category_id, 'precio' => $precio, 'descripcion' => $descripcion, 'url' => $url]);
 
         return response()->json(['isSuccess' => true]);
+    }
+
+    public function filterByCategory($category_id)
+    {
+        $productos = Producto::where('category_id', $category_id)->get();
+
+        return json_encode(['productos' => $productos]);
     }
 
     public function destroy($id)
