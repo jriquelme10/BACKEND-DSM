@@ -37,7 +37,7 @@ class OrderrController extends Controller
         $pedido->status = 'PREPARANDO PEDIDO';
         $pedido->minutes = $request->minutes;
         $pedido->save();
-        return redirect(route('/index'));
+        return redirect(route('index'));
     }
 
     public function finishOrder($id, Request $request)
