@@ -9,19 +9,15 @@ class Orderr extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
-
     protected $fillable = [
-
-        'mesa_id',
-        'montoTotal',
-
+        'totalAmount',
+        'number_table',
+        'status',
     ];
 
     public function mesaId()
     {
-
-        return $this->belongsTo(Table::class, 'number_table');;
+        return $this->belongsTo(Table::class, 'number_table');
     }
 
     public function detallesOrden()

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\OrderProductController;
+use App\Http\Controllers\OrderrController;
 use App\Http\Controllers\PlatosController;
 use App\Http\Controllers\TableController;
 use Illuminate\Http\Request;
@@ -22,10 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 Route::post('saveOrder', [ResumenOrdenController::class, 'saveOrder']);
-
-
 
 Route::controller(PlatosController::class)->group(function () {
     Route::get('/platos', 'index');
@@ -34,6 +33,7 @@ Route::controller(PlatosController::class)->group(function () {
     Route::post('/platoUpdate', 'update');
     Route::post('/platoUpdateImage', 'updateImage');
     Route::delete('/platos/{id}', 'destroy');
+    Route::get('/platosFilter/{category_id}', 'filterByCategory');
 });
 
 Route::controller(CategoryController::class)->group(function () {
@@ -50,6 +50,22 @@ Route::controller(TableController::class)->group(function () {
     Route::get('/mesa/{number_table}', 'show');
     Route::put('/mesa/{id}', 'update');
     Route::delete('/mesas/{id}', 'destroy');
+});
+
+Route::controller(OrderrController::class)->group(function () {
+    Route::get('/orders', 'index');
+    Route::post('/order', 'create');
+    Route::get('/order/{id}', 'show');
+    Route::put('/orderUpdate/{id}', 'update');
+    Route::delete('/orders/{id}', 'destroy');
+});
+
+Route::controller(OrderProductController::class)->group(function () {
+    Route::get('/orderProducts', 'index');
+    Route::post('/orderProduct', 'create');
+    Route::get('/orderProduct/{id}', 'show');
+    Route::put('/orderProductUpdate/{id}', 'update');
+    Route::delete('/orderProducts/{id}', 'destroy');
 });
 
 Route::post('/upload', [ImageController::class, 'uploadImage'])->name('images.upload');
