@@ -54,6 +54,7 @@ Route::controller(TableController::class)->group(function () {
 
 Route::controller(OrderrController::class)->group(function () {
     Route::get('/orders', 'index');
+    Route::get('/ordersAPP', 'indexAPP');
     Route::post('/order', 'create');
     Route::get('/order/{id}', 'show');
     Route::put('/orderUpdate/{id}', 'update');
