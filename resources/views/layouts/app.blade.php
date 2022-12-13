@@ -21,7 +21,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Fashion dog') }}</title>
+    <title>{{ config('app.name', 'Restaurant Colo-Colo') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -45,7 +45,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ route('login') }}">
                     <img src="{{URL::asset('img/logo.PNG')}}" style="max-width:60px; margin-top: -7px;">
-                    {{ "Fashion Dog" }}
+                    {{ "Restaurant Colo-Colo" }}
                 </a>
 
 

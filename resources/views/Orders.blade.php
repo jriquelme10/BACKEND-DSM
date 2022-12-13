@@ -26,7 +26,7 @@
                         <th>VER DETALLE</th>
                         <th>TIEMPO PEDIDO</th>
                         <th>ESTADO</th>
-                        <th>CAMBIAR ESTADO</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -42,12 +42,9 @@
                                 data-target="#Modal-{{ $pedido->id }}">Ver detalle</button></td>
 
                         <td><button type="button" class="btn btn-info" data-toggle="modal"
-                            data-target="#Tiempo-{{ $pedido->id }}">Asignar tiempo</button></td>
+                            data-target="#Time-{{ $pedido->id }}">Asignar tiempo</button></td>
 
                             <td>{{ $pedido->status }}</td>
-
-                            <td><button  action="{{ route('finishOrder', ['id' => $pedido->id]) }}" type="button" class="btn btn-danger" data-toggle="modal"
-                                data-dismiss="submit">Finalizar pedido</button></td>
                         </tr>
 
 
@@ -84,10 +81,9 @@
                             </div>
                         </div>
                     </div>
-                    <form class="formulario" method="GET"
-                                 action="{{ route('attendOrder', ['id' => $pedido->id]) }}">
+                    <form class="formulario" method="GET" action="{{ route('attendOrder', ['id' => $pedido->id]) }}">
 
-                                <div class="modal fade" id="Tiempo-{{ $pedido->id }}" tabindex="-1"
+                                <div class="modal fade" id="Time-{{ $pedido->id }}" tabindex="-1"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">

@@ -40,13 +40,13 @@ class OrderrController extends Controller
         return redirect(route('index'));
     }
 
-    public function finishOrder($id, Request $request)
+    public function finishOrder($id)
     {
 
         $pedido = Orderr::where('id', $id)->get()->first();
 
         $pedido->status = 'PEDIDO ENTREGADO';
         $pedido->save();
-        return redirect(route('/ordenes'));
+        return redirect(route('index'));
     }
 }
